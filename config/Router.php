@@ -52,6 +52,9 @@ class Router
                 elseif ($_GET['action'] == 'Dashboard') {
                     $this->backController->Dashboard();
                 }
+                elseif ($_GET['action'] == 'deletePost') {
+                    $this->backController->deletePost();
+                }
             } else {
                 $this->frontController->listPosts();
 
