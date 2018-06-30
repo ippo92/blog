@@ -33,7 +33,7 @@ class PostManager extends Manager
 
     }
 
-    public function updatePost($title,$content,$id )
+    public function updatePost($title,$content,$id)
     {
         $db = $this->dbConnect();
         
@@ -41,5 +41,12 @@ class PostManager extends Manager
         $req = $db->prepare('UPDATE posts SET title = :title, content = :content WHERE id = :id');
         $req->execute(array('title' =>$title, 'content' =>$content, 'id' =>$id));
         
+    }
+
+    public function deletePost($id)
+    {
+        $db = $this->dbConnect();
+        $req = $db->prepare('DELETE FROM posts WHERE id = :id');
+        $req->execute(array('id' =>$id));
     }
 }
