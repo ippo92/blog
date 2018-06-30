@@ -54,6 +54,12 @@ class BackController
         require('view/dashboardView.php');
     }
 
+    public function deletePost()
+    {
+        $postManager = new PostManager();
+        $post = $postManager->deletePost($_GET['id']);
+        header('Location: index.php?action=Dashboard');
+    }
 }
 
 
