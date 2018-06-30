@@ -47,9 +47,10 @@ class Router
                     $this->backController->getUpdatePost();
                 }
                 elseif ($_GET['action'] == 'updatePost') {
-                    var_dump($_GET['id']);
                     $this->backController->updatePost();
-                    
+                }
+                elseif ($_GET['action'] == 'Dashboard') {
+                    $this->backController->Dashboard();
                 }
             } else {
                 $this->frontController->listPosts();
