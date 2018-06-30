@@ -37,9 +37,9 @@ class PostManager extends Manager
     {
         $db = $this->dbConnect();
         
-        var_dump($id);
-        $req = $db->prepare('UPDATE posts SET (title, content) VALUES (?, ?) WHERE id = ?');
-        $req->execute(array($title, $content, $id));
-        var_dump($req);
+        
+        $req = $db->prepare('UPDATE posts SET title = :title, content = :content WHERE id = :id');
+        $req->execute(array('title' =>$title, 'content' =>$content, 'id' =>$id));
+        
     }
 }
