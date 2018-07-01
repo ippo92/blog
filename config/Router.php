@@ -61,9 +61,14 @@ class Router
                 elseif ($_GET['action'] == 'deleteComment') {
                     $this->backController->deleteComment();
                 }
+                elseif ($_GET['action'] == 'reportComment') {
+                    $this->frontController->reportComment();
+                }
+                elseif ($_GET['action'] == 'approveComment') {
+                    $this->backController->approveComment();
+                }
             } else {
                 $this->frontController->listPosts();
-
             }
 
         } catch (Exception $e) {
