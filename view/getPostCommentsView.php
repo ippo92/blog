@@ -48,7 +48,7 @@
                                     <td><?php echo $data['comment_date']?></td>
                                     <td width=""> <?php echo $data['comment']?></td>
                                     <td width="250">
-                                    <a href="" class="btn btn-danger"> Supprimer</a>
+                                    <a href="index.php?action=deleteComment&id=<?php echo $data['id']?>" class="btn btn-danger"> Supprimer</a>
                                     </td>
                                 </tr>
                                 <?php
