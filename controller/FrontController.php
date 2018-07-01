@@ -40,5 +40,12 @@ class FrontController
             header('Location: index.php?action=post&id=' . $postId);
         }
     }
+
+    public function reportComment()
+    {
+        $commentManager = new CommentManager();
+        $comments = $commentManager->reportComment($_GET['id']);
+        header('Location: index.php');
+    }
 }
 

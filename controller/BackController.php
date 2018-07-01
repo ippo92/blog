@@ -78,6 +78,14 @@ class BackController
         $comments = $commentManager->deleteComment($_GET['id']);
         header('Location: index.php?action=Dashboard');
     }
+
+
+    public function approveComment()
+    {
+        $commentManager = new CommentManager();
+        $comments = $commentManager->approveComment($_GET['id']);
+        header('Location: index.php?action=Dashboard');
+    }
 }
 
 
