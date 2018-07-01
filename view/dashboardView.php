@@ -79,15 +79,24 @@ $posts->closeCursor(); // Termine le traitement de la requête
                                 </tr>
                             </thead>
                             <tbody>
+<?php
+while ($data = $comments->fetch())
+{
+?>
                                 <tr>
-                                    <td>Jean</td>
-                                    <td>21/01/1998</td>
-                                    <td width=""> Ceci est un test de commentaires !</td>
+                                    <td><?php echo $data['author']?></td>
+                                    <td><?php echo $data['comment_date']?></td>
+                                    <td width=""><?php echo $data['comment']?></td>
                                     <td width="250">
-                                    <a href="" class="btn btn-primary"> Modifier</a>
-                                    <a href="" class="btn btn-danger"> Supprimer</a>
+                                    <a href="index.php?action=approveComment&id=<?php echo $data['id']?>" class="btn btn-success"> Approuver</a>
+                                    <a href="index.php?action=deleteComment&id=<?php echo $data['id']?>" class="btn btn-danger"> Supprimer</a>
                                     </td>
                                 </tr>
+<?php
+}
+$comments->closeCursor();
+
+?>
                     </div>
                 </div>
 
