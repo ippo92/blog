@@ -55,6 +55,9 @@ class Router
                 elseif ($_GET['action'] == 'deletePost') {
                     $this->backController->deletePost();
                 }
+                elseif ($_GET['action'] == 'getPostComments') {
+                    $this->backController->getPostComments();
+                }
             } else {
                 $this->frontController->listPosts();
 
