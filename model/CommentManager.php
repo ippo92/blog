@@ -30,5 +30,20 @@ class CommentManager extends Manager
         $req->execute(array('id' =>$id));
     }
     
+    public function reportComment($id)
+    {
+        $db = $this->dbConnect();
+        $req = $db->prepare('UPDATE comments SET reported = 1 WHERE id = :id');
+        $req->execute(array('id' =>$id));
+    }
+
+    public function approveComment($id)
+    {
+        $db = $this->dbConnect();
+        $req = $db->prepare('UPDATE comments SET reported = 0 WHERE id = :id');
+        $req->execute(array('id' =>$id));
+    }
+
+    
 
 }
