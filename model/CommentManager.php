@@ -14,6 +14,13 @@ class CommentManager extends Manager
         return $comments;
     }
 
+    public function getReportedComments()
+    {
+        $db = $this->dbConnect();
+        $comments = $db->query('SELECT id, author, comment, comment_date, reported FROM comments WHERE reported = 1 ORDER BY comment_date ASC');
+        return $comments;
+    }
+
     public function postComment($postId, $author, $comment)
     {
         $db = $this->dbConnect();
@@ -44,6 +51,6 @@ class CommentManager extends Manager
         $req->execute(array('id' =>$id));
     }
 
-    
+
 
 }
