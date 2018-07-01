@@ -71,6 +71,13 @@ class BackController
 
         require('view/getPostCommentsView.php');
     }
+
+    public function deleteComment()
+    {
+        $commentManager = new CommentManager();
+        $comments = $commentManager->deleteComment($_GET['id']);
+        header('Location: index.php?action=Dashboard');
+    }
 }
 
 
