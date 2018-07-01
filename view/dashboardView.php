@@ -53,7 +53,7 @@ while ($data = $posts->fetch())
                             <a href="index.php?action=post&id=<?php echo $data['id']?>" class=" btn btn-success"> <span class="glyphicon glyphicon-eye-open"></span> Voir</a>
                             <a href="index.php?action=getUpdatePost&id=<?php echo $data['id']?>" class="btn btn-primary"> Modifier</a>
                             <a href="index.php?action=deletePost&id=<?php echo $data['id']?>" class="btn btn-danger"> Supprimer</a>
-                            <a href="" class="btn btn-info"> Commentaires</a>
+                            <a href="index.php?action=getPostComments&id=<?php echo $data['id']?>" class="btn btn-info"> Commentaires</a>
                             </td>
                         </tr>
                       
