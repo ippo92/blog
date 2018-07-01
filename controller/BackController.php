@@ -5,6 +5,7 @@ namespace App\controller;
 
 
 use App\model\PostManager;
+use App\model\CommentManager;
 
 class BackController
 {
@@ -59,6 +60,16 @@ class BackController
         $postManager = new PostManager();
         $post = $postManager->deletePost($_GET['id']);
         header('Location: index.php?action=Dashboard');
+    }
+    
+    public function getPostComments()
+    {
+        $postManager = new PostManager();
+        $commentManager = new CommentManager();
+        $post = $postManager->getPost($_GET['id']);
+        $comments = $commentManager->getComments($_GET['id']);
+
+        require('view/getPostCommentsView.php');
     }
 }
 
