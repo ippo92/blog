@@ -50,8 +50,9 @@ class BackController
     public function Dashboard()
     {
         $postManager = new  PostManager();
+        $commentManager = new CommentManager();
         $posts = $postManager->getPosts();
-
+        $comments = $commentManager->getReportedComments();
         require('view/dashboardView.php');
     }
 
@@ -79,13 +80,15 @@ class BackController
         header('Location: index.php?action=Dashboard');
     }
 
-
     public function approveComment()
     {
         $commentManager = new CommentManager();
         $comments = $commentManager->approveComment($_GET['id']);
         header('Location: index.php?action=Dashboard');
     }
+
+
+
 }
 
 
