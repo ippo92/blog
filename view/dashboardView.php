@@ -9,95 +9,117 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <link href="https://fonts.googleapis.com/css?family=Crete+Round" rel="stylesheet">
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="/view/style.css">
 </head>
 <body>
 
-    <header>
-        <div class="wrappers">
-            <h1>Billet simple pour l'<span class="alaska">Alaska</span></h1>
-            <nav>
-                <ul>
-                    <li><a href="index.php">Accueil</a></li>
-                    <li><a href="#articles">Articles</a></li>
-                    <li><a href="index.php/#contact">Contact</a></li>
-                    <li><a href="#">Administration</a></li>
-                </ul>
-            </nav>
+<header>
+    <div class="wrappers">
+        <h1>Billet simple pour l'<span class="alaska">Alaska</span></h1>
+        <nav>
+            <ul>
+                <li><a href="index.php">Accueil</a></li>
+                <li><a href="#articles">Articles</a></li>
+                <li><a href="index.php/#contact">Contact</a></li>
+                <li><a href="#">Administration</a></li>
+            </ul>
+        </nav>
+    </div>
+</header>
+
+
+ <?php
+    if (!isset($_POST['mot_de_passe']) OR $_POST['mot_de_passe'] !=  "admin") 
+    {
+   ?>
+<div class="container-fluid">
+    <form action="index.php?action=Dashboard" method="post">
+        <div class="form-group">
+            <label for="author">Entrer le mot de passe</label>
+            <input type="password" class="form-control" id="mot_de_passe" name="mot_de_passe" placeholder="Entrer le mot de passe">
         </div>
-    </header>
+        <input type="submit" value="Envoyer"/>
+    </form>
+<?php
+} 
 
+else{
+    ?>
     <section id="fond">
-        <div class="container admin">
-            <div class="row">
-                <h3><strong>Liste des articles </strong>  <a href="" class=" btn btn-success "> Ajouter + </a> </h3>
-             
-                <table class="table table-striped table-bordered">
-                    <thead>
-                        <tr>
-                            <th>Nom de l'article</th>
-                            <th>Date</th>
-                            <th>Actions</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                    <?php
+    <div class="container admin">
+        <div class="row">
+            <h3><strong>Liste des articles </strong>  <a href="" class=" btn btn-success "> Ajouter + </a> </h3>
 
-while ($data = $posts->fetch())
-{
-?>
-                        <tr>
-                            <td><?php echo $data['title'] ?></td>
-                            <td><?php echo $data['creation_date']?></td>
-                            <td width="420">
+            <table class="table table-striped table-bordered">
+                <thead>
+                <tr>
+                    <th>Nom de l'article</th>
+                    <th>Date</th>
+                    <th>Actions</th>
+                </tr>
+                </thead>
+                <tbody>
+                <?php
+
+                while ($data = $posts->fetch())
+                {
+                    ?>
+                    <tr>
+                        <td><?php echo $data['title'] ?></td>
+                        <td><?php echo $data['creation_date']?></td>
+                        <td width="420">
                             <a href="index.php?action=post&id=<?php echo $data['id']?>" class=" btn btn-success"> <span class="glyphicon glyphicon-eye-open"></span> Voir</a>
                             <a href="index.php?action=getUpdatePost&id=<?php echo $data['id']?>" class="btn btn-primary"> Modifier</a>
                             <a href="index.php?action=deletePost&id=<?php echo $data['id']?>" class="btn btn-danger"> Supprimer</a>
                             <a href="index.php?action=getPostComments&id=<?php echo $data['id']?>" class="btn btn-info"> Commentaires</a>
-                            </td>
-                        </tr>
-                      
+                        </td>
+                    </tr>
+
+                    <?php
+                }
+
+                $posts->closeCursor(); // Termine le traitement de la requête
+
+                ?>
+
+                </tbody>
+            </table>
+        </div>
+        <div class="row">
+            <h3><strong>Commentaires remontées : </strong></h3>
+            <table class="table table-striped table-bordered">
+                <thead>
+                <tr>
+                    <th>Auteur</th>
+                    <th>Date</th>
+                    <th>Contenu</th>
+                    <th>Action</th>
+                </tr>
+                </thead>
+                <tbody>
+                <?php
+                while ($data = $comments->fetch())
+                {
+                    ?>
+                    <tr>
+                        <td><?php echo $data['author']?></td>
+                        <td><?php echo $data['comment_date']?></td>
+                        <td width=""><?php echo $data['comment']?></td>
+                        <td width="250">
+                            <a href="index.php?action=approveComment&id=<?php echo $data['id']?>" class="btn btn-success"> Approuver</a>
+                            <a href="index.php?action=deleteComment&id=<?php echo $data['id']?>" class="btn btn-danger"> Supprimer</a>
+                        </td>
+                    </tr>
+                    <?php
+                }
+                $comments->closeCursor();
+
+                ?>
+        </div>
+    </div>
 <?php
 }
-
-$posts->closeCursor(); // Termine le traitement de la requête
-
 ?>
 
-                    </tbody>
-                </table>
-            </div>
-                    <div class="row">
-                        <h3><strong>Commentaires remontées : </strong></h3>
-                        <table class="table table-striped table-bordered">
-                            <thead>
-                                <tr>
-                                    <th>Auteur</th>
-                                    <th>Date</th>
-                                    <th>Contenu</th>
-                                    <th>Action</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-<?php
-while ($data = $comments->fetch())
-{
-?>
-                                <tr>
-                                    <td><?php echo $data['author']?></td>
-                                    <td><?php echo $data['comment_date']?></td>
-                                    <td width=""><?php echo $data['comment']?></td>
-                                    <td width="250">
-                                    <a href="index.php?action=approveComment&id=<?php echo $data['id']?>" class="btn btn-success"> Approuver</a>
-                                    <a href="index.php?action=deleteComment&id=<?php echo $data['id']?>" class="btn btn-danger"> Supprimer</a>
-                                    </td>
-                                </tr>
-<?php
-}
-$comments->closeCursor();
-
-?>
-                    </div>
-                </div>
-
-
+</body>
+</html>
